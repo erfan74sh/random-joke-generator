@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+// componnents
+import Jokes from "./components/jokes/Jokes";
+import JokeGenerator from "./components/jokeGenerator/JokeGenerator";
 
 function App() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -15,6 +18,7 @@ function App() {
 				return data.jokes;
 			});
 	}, [category]);
+
 	const [singleJoke, setSingleJoke] = useState("");
 	useEffect(() => {
 		let a = jokes.filter((v, i) => i === 2);
@@ -31,23 +35,13 @@ function App() {
 		setCategory(e.target.value);
 	};
 	return (
-		<>
-			{isLoading && <h4>IS LOADING ... </h4>}
-			{/* <ul>
-				{jokes.map((joke) => (
-					<li key={joke.id}>{joke.joke}</li>
-				))}
-			</ul> */}
-			<p>{singleJoke}</p>
-			<button onClick={generateRandomJoke}>generate random joke</button>
-			<select id="category" name="category" onChange={handleCategory}>
-				<option value="Any">Any</option>
-				<option value="Programming">programming</option>
-				<option value="Miscellaneous">Misc</option>
-				<option value="Dark">Dark</option>
-				<option value="Pun">Pun</option>
-			</select>
-		</>
+		<div className="container">
+			<Jokes singleJoke={singleJoke} isLoading={isLoading} />
+			<JokeGenerator
+				generateRandomJoke={generateRandomJoke}
+				handleCategory={handleCategory}
+			/>
+		</div>
 	);
 }
 
