@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+// style
+import "./style.scss";
 
 ReactDOM.render(
 	<React.StrictMode>
